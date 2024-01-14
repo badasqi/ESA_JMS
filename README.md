@@ -6,3 +6,8 @@
 Реализованы в /messaging Consumer (слушает сообщения из RabbitMQ, сохраняет изменения в таблицу ChangeLog)
 
 MailConsumer(слушает сообщения из RabbitMQ, вызывает метод сервиса и отправляет SimpleMailMessage на адреса из таблицы Notification), Producer(отправляет сообщения в RabbitMQ)
+
+## Пример сообщения
+В теле письма переобределённый toString() для ChangeLog.
+![image](https://github.com/badasqi/ESA_JMS/assets/78803025/deb8be86-4aa7-4035-b64e-b3ac7873fda0)
+
