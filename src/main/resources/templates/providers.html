@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Providers List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Providers List</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Clients</th>
+        <!-- Здесь можно добавить другие поля провайдера, если необходимо -->
+    </tr>
+    <!-- Перебор списка провайдеров -->
+    <tbody>
+    <tr th:each="provider : ${providers}">
+        <td th:text="${provider.id}">ID</td>
+        <td th:text="${provider.name}">Name</td>
+        <td th:if="${provider.clients != null and provider.clients.size() > 0}">
+            <!-- Если у провайдера есть клиенты -->
+            <span th:each="client : ${provider.clients}">
+        <span th:text="${client.name} + ', ' + ${client.contact} + ', ' + ${client.address}+ ', ' + ${client.tariff}"></span><br>
+            </span>
+        </td>
+        <td th:if="${provider.clients == null or provider.clients.isEmpty()}">
+            <!-- Если у провайдера нет клиентов -->
+            No clients
+        </td>
+
+    </tbody>
+</table>
+</body>
+</html>

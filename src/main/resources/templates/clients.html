@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Clients List</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>Address</th>
+        <th>Tariff</th>
+        <th>Provider</th>
+    </tr>
+    <tbody>
+    <tr th:each="client : ${clients}">
+        <td th:text="${client.name}">Name</td>
+        <td th:text="${client.contact}">Contact</td>
+        <td th:text="${client.address}">Address</td>
+        <td th:text="${client.tariff}">Tariff</td>
+        <td th:text="${client.provider.name}">Provider</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
