@@ -2,6 +2,7 @@ package com.example.esalab3.messaging;
 
 
 import com.example.esalab3.entity.ChangeLog;
+import com.example.esalab3.messaging.utils.ChangeLogWithTypeInfo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,10 @@ public class Producer {
 
     public void produce(ChangeLog changeLog){
         rabbitTemplate.convertAndSend(exchange, routingKey, changeLog);
-        rabbitTemplate.convertAndSend(exchange, routingKeyMail, changeLog);
-        LOGGER.info(String.format("Send Change", changeLog));
+        if(changeLog.getChangeType() == "delete"){
+            rabbitTemplate.convertAndSend(exchange, routingKeyMail, new ChangeLogWithTypeInfo(changeLog, changeLog.getChangeType()));
+            LOGGER.info(String.format("Send mail: delete notification"));
+        }
+        LOGGER.info(String.format("Send Change : %s", changeLog.toString()));
     }
 }

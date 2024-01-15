@@ -17,7 +17,7 @@ public class Consumer {
 
     @RabbitListener(queues = {"${rabbitmq.queue}"})
     public void consume(ChangeLog changeLog){
-        LOGGER.info(String.format("GET Change in DB", changeLog));
+        LOGGER.info(String.format("GET Change in DB %s", changeLog.toString()));
         changeLogRepository.save(changeLog);
     }
 }

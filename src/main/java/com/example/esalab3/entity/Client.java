@@ -41,10 +41,6 @@ public class Client{
         this.tariff = tariff;
         this.provider = provider;
     }
-
-    // Getters and Setters
-    // Please generate or write your own getters and setters for the fields
-
     // Getters and Setters
     public int getId() {
         return id;

@@ -18,8 +18,8 @@ public class Notification {
     @Column(name = "notification_email", nullable = false, length = 255)
     private String notificationEmail;
 
-    @Column(name = "notification_details", nullable = false, length = 255)
-    private String notificationDetails;
+    @Column(name = "notification_condition", nullable = false, length = 255)
+    private String notificationCondition;
 
 }
 
