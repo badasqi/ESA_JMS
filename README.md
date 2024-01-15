@@ -5,7 +5,7 @@
 
 Реализованы в /messaging Consumer (слушает сообщения из RabbitMQ, сохраняет изменения в таблицу ChangeLog)
 
-MailConsumer(слушает сообщения из RabbitMQ, вызывает метод сервиса и отправляет SimpleMailMessage на адреса из таблицы Notification, уведомления об удалении из БД), Producer(отправляет сообщения в RabbitMQ)
+MailConsumer(слушает сообщения из RabbitMQ, формирует и отправляет SimpleMailMessage на адреса из таблицы Notification уведомления об удалении объектов из БД), Producer(отправляет сообщения в RabbitMQ)
 
 ## Пример сообщения
 В теле письма переобределённый toString() для ChangeLog.
