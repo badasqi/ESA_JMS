@@ -3,8 +3,10 @@ package com.example.esalab3.service;
 import com.example.esalab3.entity.ChangeLog;
 import com.example.esalab3.entity.Client;
 import com.example.esalab3.messaging.Producer;
+import com.example.esalab3.repository.ChangeLogRepository;
 import com.example.esalab3.repository.ClientRepository;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,13 +19,16 @@ import java.util.Optional;
 @Service
 @EnableTransactionManagement
 public class ClientService {
-    private ClientRepository clientRepository;
-    private Producer producer;
+
+    private final ClientRepository clientRepository;
+    private final Producer producer;
+    private final ChangeLogRepository changeLogRepository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository, Producer producer) {
+    public ClientService(ClientRepository clientRepository, Producer producer, ChangeLogRepository changeLogRepository) {
         this.clientRepository = clientRepository;
         this.producer = producer;
+        this.changeLogRepository = changeLogRepository;
     }
 
     @Transactional
@@ -42,6 +47,7 @@ public class ClientService {
         changeLog.setEntityClass("client");
         changeLog.setChangeTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         changeLog.setChangeDetails("Create client: " + client.toString());
+        changeLogRepository.save(changeLog);
         producer.produce(changeLog);
         return clientRepository.save(client);
     }
@@ -61,6 +67,7 @@ public class ClientService {
             client.setContact(clientDetails.getContact());
             client.setTariff(clientDetails.getTariff());
             client.setProvider(clientDetails.getProvider());
+            changeLogRepository.save(changeLog);
             producer.produce(changeLog);
         }
     }
@@ -72,6 +79,7 @@ public class ClientService {
         changeLog.setEntityClass("client");
         changeLog.setChangeTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         changeLog.setChangeDetails("Delete client: " + clientOptional.get().toString());
+        changeLogRepository.save(changeLog);
         producer.produce(changeLog);
         clientRepository.deleteById(id);
     }

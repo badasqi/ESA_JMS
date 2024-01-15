@@ -3,6 +3,7 @@ package com.example.esalab3.service;
 import com.example.esalab3.entity.ChangeLog;
 import com.example.esalab3.entity.Provider;
 import com.example.esalab3.messaging.Producer;
+import com.example.esalab3.repository.ChangeLogRepository;
 import com.example.esalab3.repository.ProviderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ import java.util.Optional;
 public class ProviderService {
     private ProviderRepository providerRepository;
     private Producer producer;
+    private ChangeLogRepository changeLogRepository;
 
     @Autowired
-    public ProviderService(ProviderRepository providerRepository, Producer producer) {
+    public ProviderService(ProviderRepository providerRepository, Producer producer, ChangeLogRepository changeLogRepository) {
         this.producer = producer;
         this.providerRepository = providerRepository;
+        this.changeLogRepository = changeLogRepository;
     }
 
     @Transactional
@@ -45,6 +48,7 @@ public class ProviderService {
         changeLog.setEntityClass("provider");
         changeLog.setChangeTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         changeLog.setChangeDetails("Create provider: " + provider.getName());
+        changeLogRepository.save(changeLog);
         producer.produce(changeLog);
     }
 
@@ -58,6 +62,7 @@ public class ProviderService {
         changeLog.setChangeTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         changeLog.setChangeDetails("Update name provider: " + provider.getName() + ", new name: " + providerDetails.getName());
         provider.setName(providerDetails.getName());
+        changeLogRepository.save(changeLog);
         producer.produce(changeLog);
         providerRepository.save(provider);
     }
@@ -70,6 +75,7 @@ public class ProviderService {
         changeLog.setEntityClass("provider");
         changeLog.setChangeTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         changeLog.setChangeDetails("Delete provider: " + providerOptional.get().getName());
+        changeLogRepository.save(changeLog);
         producer.produce(changeLog);
         providerRepository.deleteById(id);
     }
