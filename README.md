@@ -9,10 +9,11 @@ MailConsumer(слушает сообщения из RabbitMQ, формирует
 
 ## Пример сообщения
 
-В логах следущиее сообщения
-![image](https://github.com/badasqi/ESA_JMS/assets/78803025/0c0601aa-80b7-4b77-96d1-4329a64796c4)
+В логах следущие сообщения
+![image](https://github.com/badasqi/ESA_JMS/assets/78803025/ba44b2e1-96ac-459a-a6c9-3f8e95c62e23)
 
 В теле письма переобределённый toString() для ChangeLog.
-![image](https://github.com/badasqi/ESA_JMS/assets/78803025/c297be18-98b1-42bc-84eb-da39d36af4b5)
+![image](https://github.com/badasqi/ESA_JMS/assets/78803025/0c91729c-dd18-47a4-bafa-a9e1d9debe9f)
+
 
 
