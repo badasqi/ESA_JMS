@@ -18,13 +18,13 @@ public class ChangeLog {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "change_type", nullable = false, length = 10)
+    @Column(name = "change_type", nullable = false)
     private String changeType;
 
-    @Column(name = "entity_class", nullable = false, length = 255)
+    @Column(name = "entity_class", nullable = false)
     private String entityClass;
 
-    @Column(name = "change_details", columnDefinition = "TEXT")
+    @Column(name = "change_details")
     private String changeDetails;
 
     @Column(name = "change_timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

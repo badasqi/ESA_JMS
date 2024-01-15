@@ -15,10 +15,10 @@ public class Notification {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "notification_email", nullable = false, length = 255)
+    @Column(name = "notification_email", nullable = false)
     private String notificationEmail;
 
-    @Column(name = "notification_condition", nullable = false, length = 255)
+    @Column(name = "notification_condition", nullable = false)
     private String notificationCondition;
 
 }
